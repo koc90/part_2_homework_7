@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+faker = "*"
+sqlalchemy = "==1.3.13"
+alembic = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

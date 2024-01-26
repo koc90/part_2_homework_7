@@ -1,0 +1,283 @@
+
+
+Query number 1:
+SELECT students.full_name AS students_full_name, avg(grades.mark) AS average 
+FROM grades JOIN students ON students.id = grades.student_id GROUP BY students.id ORDER BY average DESC 
+ LIMIT %(param_1)s
+
+ Result:
+('David George', 4.34)
+('Yvonne Gordon', 4.11)
+('April Flowers', 4.08)
+('Amy Lamb', 4.0)
+('Madison Wang', 4.0)
+
+
+Query number 2:
+SELECT subjects.name AS subjects_name, students.full_name AS students_full_name, avg(grades.mark) AS average 
+FROM grades JOIN students ON students.id = grades.student_id JOIN subjects ON subjects.id = grades.subject_id 
+WHERE subjects.name = %(name_1)s GROUP BY subjects.id, students.id ORDER BY average DESC 
+ LIMIT %(param_1)s
+
+ Result:
+('Mathematics', 'Yvonne Gordon', 5.0)
+
+
+Query number 3:
+SELECT subjects.name AS subjects_name, groups.group_sign AS groups_group_sign, avg(grades.mark) AS average 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN students ON students.id = grades.student_id JOIN groups ON groups.id = students.group_id 
+WHERE subjects.name = %(name_1)s GROUP BY subjects.id, groups.id
+
+ Result:
+('Chemistry', 'A', 3.65)
+('Chemistry', 'B', 3.8)
+('Chemistry', 'C', 3.49)
+
+
+Query number 4:
+SELECT groups.group_sign AS groups_group_sign, avg(grades.mark) AS average 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN students ON students.id = grades.student_id JOIN groups ON groups.id = students.group_id GROUP BY groups.id ORDER BY groups.group_sign
+
+ Result:
+('A', 3.7)
+('B', 3.72)
+('C', 3.76)
+
+
+Query number 5:
+SELECT lecturers.full_name AS lecturers_full_name, subjects.name AS subjects_name 
+FROM subjects JOIN lecturers ON lecturers.id = subjects.lecturer_id 
+WHERE lecturers.id = %(id_1)s
+
+ Result:
+('Nicholas Walsh', 'Mechanics')
+('Nicholas Walsh', 'Physics')
+
+
+Query number 6:
+SELECT groups.group_sign AS groups_group_sign, students.full_name AS students_full_name 
+FROM groups JOIN students ON groups.id = students.group_id 
+WHERE groups.group_sign = %(group_sign_1)s
+
+ Result:
+('C', 'Eric Morales')
+('C', 'Donna Schaefer')
+('C', 'Pamela Burnett')
+('C', 'David Smith')
+('C', 'Yvonne Gordon')
+('C', 'Shannon Richardson')
+('C', 'Kelly Gomez')
+('C', 'Andrew Thomas')
+('C', 'Tammy Hernandez')
+('C', 'Lindsay Andrews')
+('C', 'April Flowers')
+('C', 'Bradley Mcpherson')
+('C', 'Eric Elliott')
+('C', 'Amy Lamb')
+('C', 'Jose Butler')
+('C', 'Stephanie Thomas')
+('C', 'Lori Duffy')
+
+
+Query number 7:
+SELECT groups.group_sign AS groups_group_sign, subjects.name AS subjects_name, students.full_name AS students_full_name, grades.mark AS grades_mark 
+FROM groups, grades JOIN students ON students.id = grades.student_id JOIN subjects ON subjects.id = grades.subject_id 
+WHERE groups.group_sign = %(group_sign_1)s AND subjects.name = %(name_1)s
+
+ Result:
+('B', 'Numerical Methods', 'John Butler', 5.0)
+('B', 'Numerical Methods', 'John Butler', 3.5)
+('B', 'Numerical Methods', 'Eric Morales', 4.0)
+('B', 'Numerical Methods', 'Eric Morales', 4.0)
+('B', 'Numerical Methods', 'Brian Underwood', 2.0)
+('B', 'Numerical Methods', 'Brian Underwood', 4.0)
+('B', 'Numerical Methods', 'Ruth Garcia', 2.0)
+('B', 'Numerical Methods', 'Ruth Garcia', 3.5)
+('B', 'Numerical Methods', 'Ruth Garcia', 4.5)
+('B', 'Numerical Methods', 'Donna Schaefer', 2.0)
+('B', 'Numerical Methods', 'Tyler Sosa', 5.0)
+('B', 'Numerical Methods', 'Tyler Sosa', 3.5)
+('B', 'Numerical Methods', 'Tyler Sosa', 2.0)
+('B', 'Numerical Methods', 'Tyler Sosa', 2.0)
+('B', 'Numerical Methods', 'Tyler Sosa', 4.0)
+('B', 'Numerical Methods', 'Elizabeth Pierce', 5.0)
+('B', 'Numerical Methods', 'Elizabeth Pierce', 4.5)
+('B', 'Numerical Methods', 'Elizabeth Pierce', 4.0)
+('B', 'Numerical Methods', 'Pamela Burnett', 2.0)
+('B', 'Numerical Methods', 'Pamela Burnett', 2.0)
+('B', 'Numerical Methods', 'Pamela Burnett', 2.0)
+('B', 'Numerical Methods', 'Monica Adams', 4.0)
+('B', 'Numerical Methods', 'Bill Howe', 3.0)
+('B', 'Numerical Methods', 'Bill Howe', 5.0)
+('B', 'Numerical Methods', 'Christopher Parker', 4.5)
+('B', 'Numerical Methods', 'Christopher Parker', 5.0)
+('B', 'Numerical Methods', 'Christopher Parker', 4.5)
+('B', 'Numerical Methods', 'David George', 4.5)
+('B', 'Numerical Methods', 'David George', 4.0)
+('B', 'Numerical Methods', 'Yvonne Gordon', 4.0)
+('B', 'Numerical Methods', 'Yvonne Gordon', 5.0)
+('B', 'Numerical Methods', 'Yvonne Gordon', 4.5)
+('B', 'Numerical Methods', 'Yvonne Gordon', 2.0)
+('B', 'Numerical Methods', 'Yvonne Gordon', 3.5)
+('B', 'Numerical Methods', 'Tammy Moreno', 3.5)
+('B', 'Numerical Methods', 'Tammy Moreno', 3.0)
+('B', 'Numerical Methods', 'Brianna Baldwin', 4.0)
+('B', 'Numerical Methods', 'Brianna Baldwin', 5.0)
+('B', 'Numerical Methods', 'Shannon Richardson', 4.5)
+('B', 'Numerical Methods', 'Shannon Richardson', 3.5)
+('B', 'Numerical Methods', 'Shannon Richardson', 3.0)
+('B', 'Numerical Methods', 'Shannon Richardson', 3.5)
+('B', 'Numerical Methods', 'Shannon Richardson', 3.0)
+('B', 'Numerical Methods', 'Madison Wang', 3.0)
+('B', 'Numerical Methods', 'Madison Wang', 5.0)
+('B', 'Numerical Methods', 'Madison Wang', 5.0)
+('B', 'Numerical Methods', 'Sharon Delgado DVM', 4.5)
+('B', 'Numerical Methods', 'Sharon Delgado DVM', 2.0)
+('B', 'Numerical Methods', 'Sharon Delgado DVM', 3.0)
+('B', 'Numerical Methods', 'Sharon Delgado DVM', 4.5)
+('B', 'Numerical Methods', 'Sharon Delgado DVM', 4.5)
+('B', 'Numerical Methods', 'Kelly Gomez', 5.0)
+('B', 'Numerical Methods', 'Kelly Gomez', 3.0)
+('B', 'Numerical Methods', 'Kelly Gomez', 4.5)
+('B', 'Numerical Methods', 'Shelia Hall', 5.0)
+('B', 'Numerical Methods', 'Shelia Hall', 2.0)
+('B', 'Numerical Methods', 'Shelia Hall', 4.0)
+('B', 'Numerical Methods', 'Shelia Hall', 5.0)
+('B', 'Numerical Methods', 'Shelia Hall', 2.0)
+('B', 'Numerical Methods', 'Shelia Hall', 4.5)
+('B', 'Numerical Methods', 'Sandra Faulkner', 2.0)
+('B', 'Numerical Methods', 'Sandra Faulkner', 5.0)
+('B', 'Numerical Methods', 'Sandra Faulkner', 2.0)
+('B', 'Numerical Methods', 'Sandra Faulkner', 5.0)
+('B', 'Numerical Methods', 'Andrew Thomas', 4.5)
+('B', 'Numerical Methods', 'Andrew Thomas', 5.0)
+('B', 'Numerical Methods', 'Karen Hammond', 4.5)
+('B', 'Numerical Methods', 'Karen Hammond', 4.5)
+('B', 'Numerical Methods', 'Karen Hammond', 3.5)
+('B', 'Numerical Methods', 'Karen Hammond', 3.0)
+('B', 'Numerical Methods', 'Karen Hammond', 5.0)
+('B', 'Numerical Methods', 'Tammy Hernandez', 4.5)
+('B', 'Numerical Methods', 'Tammy Hernandez', 4.5)
+('B', 'Numerical Methods', 'Tammy Hernandez', 2.0)
+('B', 'Numerical Methods', 'Tammy Hernandez', 3.0)
+('B', 'Numerical Methods', 'Tammy Hernandez', 3.0)
+('B', 'Numerical Methods', 'Tammy Hernandez', 3.5)
+('B', 'Numerical Methods', 'Tammy Hernandez', 5.0)
+('B', 'Numerical Methods', 'Alicia Thompson', 4.0)
+('B', 'Numerical Methods', 'Alicia Thompson', 3.5)
+('B', 'Numerical Methods', 'Alicia Thompson', 4.0)
+('B', 'Numerical Methods', 'Alicia Thompson', 5.0)
+('B', 'Numerical Methods', 'Terry Jackson', 5.0)
+('B', 'Numerical Methods', 'Lindsay Andrews', 3.5)
+('B', 'Numerical Methods', 'Lindsay Andrews', 4.0)
+('B', 'Numerical Methods', 'Lindsay Andrews', 4.0)
+('B', 'Numerical Methods', 'Erica Garza', 3.0)
+('B', 'Numerical Methods', 'Erica Garza', 3.5)
+('B', 'Numerical Methods', 'Erica Garza', 2.0)
+('B', 'Numerical Methods', 'Derrick Williams', 2.0)
+('B', 'Numerical Methods', 'April Flowers', 4.5)
+('B', 'Numerical Methods', 'April Flowers', 3.5)
+('B', 'Numerical Methods', 'Dana Walker', 3.0)
+('B', 'Numerical Methods', 'Dana Walker', 2.0)
+('B', 'Numerical Methods', 'Dana Walker', 3.5)
+('B', 'Numerical Methods', 'Dana Walker', 3.0)
+('B', 'Numerical Methods', 'Jacob Ryan', 5.0)
+('B', 'Numerical Methods', 'Jacob Ryan', 3.0)
+('B', 'Numerical Methods', 'Bradley Mcpherson', 3.0)
+('B', 'Numerical Methods', 'Bradley Mcpherson', 2.0)
+('B', 'Numerical Methods', 'Bradley Mcpherson', 3.0)
+('B', 'Numerical Methods', 'Bradley Mcpherson', 3.5)
+('B', 'Numerical Methods', 'Gary Hunt', 5.0)
+('B', 'Numerical Methods', 'Nicole Wheeler', 2.0)
+('B', 'Numerical Methods', 'Nicole Wheeler', 5.0)
+('B', 'Numerical Methods', 'Eric Elliott', 5.0)
+('B', 'Numerical Methods', 'Eric Elliott', 3.5)
+('B', 'Numerical Methods', 'Eric Elliott', 3.0)
+('B', 'Numerical Methods', 'Eric Elliott', 2.0)
+('B', 'Numerical Methods', 'Cameron Lynch', 3.5)
+('B', 'Numerical Methods', 'Sherri Shelton', 4.0)
+('B', 'Numerical Methods', 'Sherri Shelton', 3.5)
+('B', 'Numerical Methods', 'Amy Lamb', 4.0)
+('B', 'Numerical Methods', 'Amy Lamb', 4.5)
+('B', 'Numerical Methods', 'Peter Garcia', 4.5)
+('B', 'Numerical Methods', 'Peter Garcia', 4.0)
+('B', 'Numerical Methods', 'Peter Garcia', 5.0)
+('B', 'Numerical Methods', 'Cathy Larson', 4.5)
+('B', 'Numerical Methods', 'Cathy Larson', 3.5)
+('B', 'Numerical Methods', 'Cathy Larson', 2.0)
+('B', 'Numerical Methods', 'Cathy Larson', 3.0)
+('B', 'Numerical Methods', 'Jose Butler', 2.0)
+('B', 'Numerical Methods', 'Lucas Mckenzie', 3.0)
+('B', 'Numerical Methods', 'Lucas Mckenzie', 3.0)
+('B', 'Numerical Methods', 'Jennifer Rollins', 3.0)
+('B', 'Numerical Methods', 'Jennifer Rollins', 4.5)
+('B', 'Numerical Methods', 'Jennifer Rollins', 3.5)
+('B', 'Numerical Methods', 'Stephanie Thomas', 5.0)
+('B', 'Numerical Methods', 'Stephanie Thomas', 3.5)
+('B', 'Numerical Methods', 'Stephanie Thomas', 4.0)
+('B', 'Numerical Methods', 'Matthew Smith', 4.0)
+('B', 'Numerical Methods', 'Stephen Ryan', 5.0)
+('B', 'Numerical Methods', 'Lori Duffy', 2.0)
+('B', 'Numerical Methods', 'Lori Duffy', 5.0)
+
+
+Query number 8:
+SELECT lecturers.full_name AS lecturers_full_name, avg(grades.mark) AS average 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN lecturers ON lecturers.id = subjects.lecturer_id 
+WHERE lecturers.id = %(id_1)s GROUP BY lecturers.full_name
+
+ Result:
+('Travis Smith', 3.86)
+
+
+Query number 9:
+SELECT students.full_name AS students_full_name, subjects.name AS subjects_name, avg(grades.mark) AS average 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN students ON students.id = grades.student_id 
+WHERE students.id = %(id_1)s GROUP BY students.full_name, subjects.name ORDER BY average DESC
+
+WHERE average >= 3.0 - execuded by Python
+
+ Result:
+('Elizabeth Pierce', 'Descriptive Geomery', 4.5)
+('Elizabeth Pierce', 'Numerical Methods', 4.5)
+('Elizabeth Pierce', 'Chemistry', 4.0)
+('Elizabeth Pierce', 'Mechanics', 3.75)
+('Elizabeth Pierce', 'Mathematics', 3.25)
+('Elizabeth Pierce', 'Physics', 3.25)
+('Elizabeth Pierce', 'Information Technology', 3.0)
+
+
+Query number 10:
+SELECT students.full_name AS students_full_name, lecturers.full_name AS lecturers_full_name, subjects.name AS subjects_name 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN students ON students.id = grades.student_id JOIN lecturers ON lecturers.id = subjects.lecturer_id 
+WHERE students.id = %(id_1)s AND lecturers.id = %(id_2)s GROUP BY subjects.name, students.full_name, lecturers.full_name
+
+ Result:
+('Elizabeth Pierce', 'Nicholas Walsh', 'Mechanics')
+('Elizabeth Pierce', 'Nicholas Walsh', 'Physics')
+
+
+Query number 11:
+SELECT students.full_name AS students_full_name, lecturers.full_name AS lecturers_full_name, avg(grades.mark) AS avg_1 
+FROM grades JOIN subjects ON subjects.id = grades.subject_id JOIN students ON students.id = grades.student_id JOIN lecturers ON lecturers.id = subjects.lecturer_id 
+WHERE students.id = %(id_1)s AND lecturers.id = %(id_2)s GROUP BY students.full_name, lecturers.full_name
+
+ Result:
+('Elizabeth Pierce', 'Nicholas Walsh', 3.42)
+
+
+Query number 12:
+SELECT groups.group_sign AS groups_group_sign, subjects.name AS subjects_name, grades.date AS grades_date, students.full_name AS students_full_name, grades.mark AS grades_mark 
+FROM groups, grades JOIN students ON students.id = grades.student_id JOIN subjects ON subjects.id = grades.subject_id 
+WHERE groups.group_sign = %(group_sign_1)s AND subjects.name = %(name_1)s AND grades.date = %(date_1)s ORDER BY grades.date DESC
+
+ Result:
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Christopher Parker', 4.5)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Sandra Faulkner', 2.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Karen Hammond', 5.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Terry Jackson', 5.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Jacob Ryan', 5.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Bradley Mcpherson', 3.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Eric Elliott', 2.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Peter Garcia', 4.0)
+('B', 'Numerical Methods', datetime.datetime(2023, 10, 31, 0, 0), 'Peter Garcia', 5.0)
